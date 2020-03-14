@@ -1,4 +1,3 @@
-# генерация: дикт, фромкис, генератор; отлов некорректного ключа; параметр: методы?
 import pytest
 
 
@@ -13,7 +12,7 @@ class TestDictGeneration:
 
     def test_2(self):
         """
-        создание словаря с помощью функции акщьлуны
+        создание словаря с помощью функции fromkeys
         """
         d = dict.fromkeys(['a', 'b'], 5)
         assert d == {'a': 5, 'b': 5}
@@ -29,9 +28,8 @@ class TestDictGeneration:
 @pytest.mark.parametrize('methods, val', [('keys', [0, 2]), ('values', [1, 3])])
 def test_4(methods, val):
     d = {0: 1, 2: 3}
-    s = 'list(d.' + methods + '())'
-    assert eval(s) == val
-
+    met = getattr(d, methods)
+    assert list(met()) == val
 
 def test_5():
     d = {0: 1, 1: 3}

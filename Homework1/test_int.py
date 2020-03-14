@@ -9,13 +9,15 @@ def test_1():
     assert type(a) == int
 
 
-@pytest.mark.parametrize('sign, value', [('+',13), ('-',3), ('*',40), ('//',1)])
+@pytest.mark.parametrize('sign, value', [('__add__',13), ('__sub__',3), ('__mul__',40), ('__floordiv__',1)])
 def test_2(sign, value):
     """
     проверка основных операций c целыми числами
     """
-    a = '8 ' + sign + ' 5'
-    assert eval(a) == value
+    a = 8
+    b = 5
+    met = getattr(a, sign)
+    assert met(b) == value
 
 
 class TestIntMethods:
